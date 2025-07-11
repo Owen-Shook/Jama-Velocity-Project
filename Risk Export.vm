@@ -1,0 +1,1036 @@
+MIME-Version: 1.0
+X-Document-Type: Workbook
+Content-Type: multipart/related; boundary="----=_NextPart_01D8DFBE.2078AF30"
+
+#########################################################################################################################
+## ======================================================================================================================
+## Name: Jama_Training_Excel_Velocity_Template.vm
+##
+## Output Type: Excel XLXS, Excel Legacy, HTML
+## 
+## Description/Notes:
+## 
+## Context Sensitive: T/F
+## 
+##
+## ======================================================================================================================
+## MODIFICATION HISTORY 
+## 
+## Date         Revision   Person            Comments 
+## -----------  ---------  ----------------  -------------------------------------------------------------------------
+## 2025-06-13    1.0      Liam Rotchford     - Ver 1.3.1 Master Template w/output to Excel For Jama Training Module
+##
+##
+##
+## ===================================================================================================================== 
+## Criteria: 
+##
+##      Type:     Display Name:           Report Global Variable:
+##      ------------------------------------------------------------
+##
+##
+##
+#########################################################################################################################
+
+#########################################################################################################################
+## ======================================================================================================================
+## Template Steps:
+## -----------------
+##  1. In your Mockup .mhtml file: 
+##     o Find: =\n Replace: <nothing>
+##     o Find: = Replace: =
+##     o Remove any JS <script>...</script> tags and content between tags
+##     o Remove <frameset>...</frameset> tags and content between tags
+##     o Remove all "Content-Transfer-Encoding: quoted-printable" (this is important because it can ruin styles if present)
+##  2. Copy and paste the styles from the Mockup to this template, replacing the styles in the "STYLES" section 
+##  3. Copy and paste the entire table from the Mockup to this template, replacing the table in the "BODY" section
+##  4. Replace the ExcelWorksheet x:Name to correspond with your tab name in the HEAD of this template
+##  5. Do not place comments above the opening code of the file "MIME-Version: 1.0..."
+##  6. Do not delete the boundaries or xml file lists
+##
+## ======================================================================================================================
+#########################################################################################################################
+#########################################################################################################################
+##
+##  1. DATA_SOURCES
+##
+#########################################################################################################################
+##
+## Data Sources available without declaration
+##-------------------------------------------
+## $format
+## $project
+## $documentList
+## $baseUrl
+## $contextType
+## $contextId
+## $report_name
+##
+## Data Sources loaded for this report
+##-------------------------------------------
+#if( $documentSource ) ##
+  ## Jama 8.44 or greater
+  ## Jama 8.42 if New Velocity Feature Flag Enabled
+  #set( $docDao = $documentSource )
+  #set( $documentNodeDao = $documentSource )
+  #set( $attachmentDao = $documentSource )
+  #set( $attachmentService = $documentSource )
+  #set( $docTypeFieldDao = $documentSource )
+  #set( $relDao = $documentSource )
+  #set( $versionDao = $documentSource )
+  #set( $testRunDao = $testSource )
+  #set( $testPlanDao = $testSource)
+  #set( $testSetDao = $testSource)
+  #set( $testCycleDao = $testSource)
+  #set( $velocityServiceWrapper = $documentSource )
+  #set( $baselineDao = $baselineSource )
+  #set( $contourItemDao = $documentSource )
+  #set( $userDao = $userSource )
+  #set( $lookupDao = $documentSource )
+#else
+  ## Jama 8.43 or older
+  ## Jama 8.43 or older ## Zoll is version 8.42.1 without the Velocity Feature Flag Enabled
+  #set( $contourItemDao = $applicationContext.getBean("contourItemDao"))
+  #set( $docDao = $applicationContext.getBean("documentDao"))
+  #set( $documentNodeDao = $applicationContext.getBean("documentNodeDao"))
+  #set( $attachmentDao = $applicationContext.getBean("attachmentDao"))
+  #set( $attachmentService = $applicationContext.getBean("attachmentService"))
+  #set( $relDao = $applicationContext.getBean("relationshipDao") )
+  #set( $versionDao = $applicationContext.getBean("versionDao") )
+  #set( $testRunDao = $applicationContext.getBean("testRunDao") )
+  #set( $testPlanDao = $applicationContext.getBean("testPlanDao"))
+  #set( $testSetDao = $applicationContext.getBean("testSetDao"))
+  #set( $testCycleDao = $applicationContext.getBean("testCycleDao"))
+  #set( $userDao = $applicationContext.getBean("userDao"))
+  #set( $baselineDao = $applicationContext.getBean("baseLineDao") )
+##
+#end
+##
+
+## Report Parameters
+##-------------------------------------------
+
+#if($!contextType && $contextType.toUpperCase().contains("BASELINE") )
+  #set( $baselineMode = true)
+  #set( $baselineId = $mathTool.toInteger($contextId))
+  #set( $reportBaseline = $baselineDao.getBaseLine( $baselineId ))
+#else
+  #if( $reportBaseline )
+    #set( $baselineMode = $reportBaseline )
+  #else
+    #set( $baselineMode = false )
+  #end
+#end
+
+
+#if( $reportTestRuns )
+  #set( $testRunMode = $reportTestRuns )
+#else
+  #set( $testRunMode = false )
+#end
+##
+##
+##
+## Report Constants 
+## -------------------------------------------
+#set( $cmpKey = "CMP") ##
+#set( $setKey = "SET") ##
+#set( $fldKey = "FLD") ##
+#set( $txtKey = "TXT") ##
+#set( $objectTypeField = "object_type" ) ##
+#set( $timeZone = "America/Los_Angeles" ) ##
+##
+## 
+#########################################################################################################################
+
+
+
+
+
+#########################################################################################################################
+##
+##  HEAD 
+##
+#########################################################################################################################
+
+#* Replace the ExcelWorksheet x:Name "Report Name" to correspond with the name of your worksheet Tab
+That is all you need to change within the head tags *#
+
+------=_NextPart_01D8DFBE.2078AF30
+Content-Location: file:///C:/61233B10/Single_Sheet_Mockup.htm
+Content-Type: text/html; charset="utf-8"
+
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:x="urn:schemas-microsoft-com:office:excel"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta name="Excel Workbook Frameset">
+<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+<meta name=ProgId content=Excel.Sheet>
+<meta name=Generator content="Microsoft Excel 15">
+<link rel=File-List href="Single_Sheet_Mockup_files/filelist.xml">
+<![if !supportTabStrip]>
+<link id="shLink" href="Single_Sheet_Mockup_files/sheet001.htm">
+
+<link id="shLink">
+<![endif]><!--[if gte mso 9]><xml>
+ <x:ExcelWorkbook>
+  <x:ExcelWorksheets>
+   <x:ExcelWorksheet>
+    <x:Name>Report Name</x:Name>
+    <x:WorksheetSource HRef="Single_Sheet_Mockup_files/sheet001.htm"/>
+   </x:ExcelWorksheet>
+  </x:ExcelWorksheets>
+  <x:Stylesheet HRef="Single_Sheet_Mockup_files/stylesheet.css"/>
+  <x:WindowHeight>12165</x:WindowHeight>
+  <x:WindowWidth>27435</x:WindowWidth>
+  <x:WindowTopX>930</x:WindowTopX>
+  <x:WindowTopY>32767</x:WindowTopY>
+  <x:ProtectStructure>False</x:ProtectStructure>
+  <x:ProtectWindows>False</x:ProtectWindows>
+ </x:ExcelWorkbook>
+</xml><![endif]-->
+</head>
+</html>
+
+#########################################################################################################################
+##
+##  STYLES 
+##
+#########################################################################################################################
+------=_NextPart_01D8DFBE.2078AF30
+Content-Location: file:///C:/61233B10/Single_Sheet_Mockup_files/stylesheet.css
+Content-Type: text/css; charset="utf-8"
+
+#* Paste your styles here, replacing the styles in this template. You do not need the opening and closing style tags. 
+The styles are found by the template via the boundary and "Content-Location" *#
+tr
+  {mso-height-source:auto;}
+col
+  {mso-width-source:auto;}
+br
+  {mso-data-placement:same-cell;}
+.style0
+  {mso-number-format:General;
+  text-align:left;
+  vertical-align:top;
+  white-space:nowrap;
+  mso-rotate:0;
+  mso-background-source:auto;
+  mso-pattern:auto;
+  color:black;
+  font-size:11.0pt;
+  font-weight:400;
+  font-style:normal;
+  text-decoration:none;
+  font-family:Calibri, sans-serif;
+  mso-font-charset:0;
+  border:none;
+  mso-protection:locked visible;
+  mso-style-name:Normal;
+  mso-style-id:0;}
+td
+  {mso-style-parent:style0;
+  padding-top:1px;
+  padding-right:1px;
+  padding-left:1px;
+  mso-ignore:padding;
+  color:black;
+  font-size:11.0pt;
+  font-weight:400;
+  font-style:normal;
+  text-decoration:none;
+  font-family:Calibri, sans-serif;
+  mso-font-charset:0;
+  mso-number-format:General;
+  text-align:left;
+  vertical-align:top;
+  border:none;
+  mso-background-source:auto;
+  mso-pattern:auto;
+  mso-protection:locked visible;
+  white-space:normal;
+  mso-rotate:0;}
+.xl65
+  {mso-style-parent:style0;
+  background:white;
+  mso-pattern:black none;}
+.xl66
+  {mso-style-parent:style0;
+  color:black;
+  font-weight:700;
+  text-align:left;
+  vertical-align:top;
+  border-top:none;
+  border-right:.5pt solid gray;
+  border-bottom:.5pt solid gray;
+  border-left:.5pt solid gray;
+  background:#B4C6E7;
+  mso-pattern:black none;
+  white-space:normal;}
+.xl67
+  {mso-style-parent:style0;
+  color:black;
+  text-align:left;
+  vertical-align:top;
+  border-top:none;
+  border-right:.5pt solid gray;
+  border-bottom:.5pt solid gray;
+  border-left:none;
+  white-space:normal;}
+
+#########################################################################################################################
+##
+##  MACROS
+##
+#########################################################################################################################
+##
+#########################################################################################################################
+#########################################################################################################################
+##          Macro: formatRichTextCell
+##          Desc: Use on purely textual Rich Text Fields (I.e use directly in Cells)
+##          Input: $inString - input string
+##          Return: string, ready for opening in Word
+#########################################################################################################################
+#macro( formatRichTextCell $inString )
+  #if( $inString )
+    #set( $string = $inString.toString() )
+    
+    #set( $string = $string.replaceAll("<div.*?>|<\/div>",""))
+    #set( $string = $string.replaceAll("<html.*?>|<html>", ""))
+    #set( $string = $string.replaceAll("<span.*?>|<\/span>", ""))
+
+    ## remove images ## 
+    #set( $string = $string.replaceAll("<p.*?><img.*?><\/p>", ""))
+    #set( $string = $string.replaceAll("<img.*?>",""))
+    #set( $string = $string.replaceAll("<figure.*?>|<\/figure>", ""))
+    #set( $string = $string.replaceAll("<svg.*?>|<\/svg>", ""))
+    ## figure captions should not cause issue, replace at user discretion
+    #set( $string = $string.replaceAll("<figcaption.*?>|<\/figcaption>",""))
+
+    ## remove tables ## 
+    #set( $string = $string.replaceAll("<table.*?>|<\/table>",""))
+    #set( $string = $string.replaceAll("<col.*?>|<\/col>", ""))
+    #set( $string = $string.replaceAll("<tbody.*?>|<\/tbody>",""))
+    #set( $string = $string.replaceAll("<thead.*?>|<\/thead>",""))
+    #set( $string = $string.replaceAll("<th.*?>(?:.|\s)*?<\/th>", ""))
+    #set( $string = $string.replaceAll("<th.*?>|<\/th>", ""))
+    #set( $string = $string.replaceAll("<tr.*?>|<\/tr>",""))
+    #set( $string = $string.replaceAll("<td.*?>(?:.|\s)*?<\/td>", ""))
+    #set( $string = $string.replaceAll("<td.*?>|<\/td>", ""))
+    #set( $string = $string.replaceAll("<tfoot.*?>|<\/tfoot>",""))
+    #set( $string = $string.replaceAll("<caption.*?>|<\/caption>",""))
+
+    ## remove link tags
+    #set( $string = $string.replaceAll("<\/?(a).*?>",""))
+
+    ## replace list tags with a restructured list via <br>s and the bullet html entity
+    #set( $string = $string.replaceAll("<ul.*?>","<br>"))
+    #set( $string = $string.replaceAll("<ol>","<br>"))
+    #set( $string = $string.replaceAll("<\/ol>|<\/ul>",""))
+    #set( $string = $string.replaceAll("<li.*?>","&#x2022; "))
+    #set( $string = $string.replaceAll("<\/li>","<br>"))
+
+    ## Misc edge cases
+    #set( $string = $string.replaceAll("\xA0",""))
+
+    $string
+  #end
+#end
+#########################################################################################################################
+#########################################################################################################################
+##
+
+#########################################################################################################################
+##          Macro: formatPlainText
+##          Desc: Remove all possibly present html tags from text box field content
+#########################################################################################################################
+#macro( formatPlainText $inString)
+  #if( $inString )
+    #set( $string = $inString.toString() )
+    #set( $string = $string.replaceAll("<(.|\n)*?>", ""))
+
+    $string
+  #end
+#end
+
+#########################################################################################################################
+#macro( stripPlainText $text )
+  #set($text = $text.replaceAll("<"," &lt;"))
+  #set($text = $text.replaceAll(">"," &gt;"))
+  $text
+#end
+#########################################################################################################################
+##
+
+#########################################################################################################################
+##          lookupPickListColor
+##          Input: item, the unique custom field name, the fetched picklist item
+##          Output: String type hex code color 
+##          Note: see example at base of template
+##          Call Example: #lookupPickListColor($doc "<unique field name>" $<item variable with item data> )
+##          Apply to cell: style="background:#$color;mso-pattern:#$color none;""
+#########################################################################################################################
+#macro( lookupPickListColor $doc $uniqueFieldName $fetchedFieldValue )
+              
+  #set( $docTypeField = $docTypeFieldDao.getDocumentTypeFieldByName( $uniqueFieldName, $doc.documentType.id ))
+  #set( $lookupTypeId = $docTypeField.getLookupTypeId())
+  #set( $fieldId = $docTypeField.documentField.id)
+  #set( $lookupTypeList = [])
+  #if( $lookupTypeList.add( $lookupTypeId ))#end
+  #set( $getLookupIdsReturn = $lookupDao.getLookupIdsByLookupTypes($lookupTypeList))
+  #set( $lookupValues = [])
+  
+  #foreach( $l in $getLookupIdsReturn)
+  #set( $lookup = $lookupDao.getLookup($mathTool.toInteger($l)))
+    #if( $lookupValues.add( $lookup)) #end
+  #end
+  #set( $color = "FFFFFF")
+  #foreach( $l in $lookupValues)
+    #if( $l.name == $fetchedFieldValue )
+      #set( $color = $l.color)
+      #break
+    #end
+  #end
+
+#end 
+##
+#########################################################################################################################
+##          Macro: getHierarchyLevel
+##          Input: $doc - document object
+##                 $baselineMode - true: export was from a baseline, false: export was from the project
+##                 $baselineId   - ID of the baseline that the items are part of, if in baseline mode
+##          Output: $hierarchyLevel - number, which heading level this item is in Jama relative to the container
+#########################################################################################################################
+#macro( getHierarchyLevel $doc $baselineMode $baselineId )
+  #set( $seqSubStrings = [] )
+  #set( $hierarchyLevel = 1)
+  ## Get hierarchy from the baseline
+  #if( $baselineMode )
+    #set( $docNode = $documentNodeDao.getDocumentNodeForBaseLine(5, $doc.id, $baselineId))
+  ## Get hierarchy from the project
+  #else
+    #set( $docNode = $documentNodeDao.getDocumentNode(5, $doc.id))
+  #end
+  ##Debug: $docNode
+  #set( $seqSubStrings = $docNode.sequence.split("\."))
+  ##Debug: $seqSubStrings
+  #set( $hierarchyLevel = $seqSubStrings.size())
+  #if( !$hierarchyLevelTop )
+    #set($hierarchyLevelTop = $hierarchyLevel)
+  #end
+
+  #set($hierarchyLevel = $hierarchyLevel - $hierarchyLevelTop + 1)
+#end
+
+
+#########################################################################################################################
+##           Macro: getStatus
+##           Input: $doc - document object
+##           Output: $docStatus - status of the item
+#########################################################################################################################
+#macro( getStatus $doc )
+  #set( $docStatus = false )
+  #foreach( $docTypeField in $doc.documentType.documentTypeFields )
+    #if( $docTypeField.documentField.name == "status" )
+      #set ( $docStatus = $doc.status.name )
+      #break
+    #end
+  #end
+#end
+##
+
+#########################################################################################################################
+##
+
+#########################################################################################################################
+##          Macro: getDate
+##          Input: Java Time Zone ID to determine which timezone to display the date in
+##          Output: Formatted date in the desired timezone
+#########################################################################################################################
+#macro( getDate $inputDate $inputTimeZone )
+  #set( $outTz = $dateTool.getTimeZone().getTimeZone($inputTimeZone) )
+  #set( $locale = $dateTool.getLocale() )
+  $dateTool.format( "MM/dd/yyyy", $inputDate, $locale, $outTz )
+#end
+
+#########################################################################################################################
+##
+#########################################################################################################################
+##          Macro: getBaselineRelationships
+##          Input: $currentVersionId - ID of the currentVersion of an item 
+##                 $baselineId - ID of a baseline   
+##                 $inDoc - current item
+##                 $inDownstream - true provides downstream relationships, false provides upstream relationships    
+##          Creates: $returnBaselineRels list of upstream Or downstream baseline relationships 
+#########################################################################################################################
+#macro( getBaselineRelationships $currentVersionId $baselineId $inDoc $inDownstream )
+  #set( $start = 0 )
+  #set( $count = 20 )
+  #set( $versionedRelationships = [] )
+  #set( $returnBaselineRels = [])
+  #set( $pageSize = 20)
+  #set( $relatedIds = [] )
+  ##
+  #set($baseRelsPage = $documentSource.getRelationships($currentVersionId,$baselineId,$start,$count))
+  ##
+  #set( $totalRels = [])
+  #set( $totalRels = $baseRelsPage.getPageInfo().getTotalResults())
+  ## DEBUG Baseline Page Info: $baseRelsPage.getPageInfo() <br><br>
+  ## DEBUG Baseline Relationship Count: $baseRelsPage.getPageInfo().getTotalResults()<br><br>
+  ## DEBUG Baseline Results: $baseRelsPage.getResults() 
+  #if( $totalRels && $totalRels > 0)
+    #set( $page_count = $mathTool.floor($mathTool.div($totalRels,$pageSize)) )
+    #foreach( $page in [0..$page_count])
+      #set( $baseRelsPage = $documentSource.getRelationships($currentVersionId,$baselineId,$start,$count))
+      #set( $baseRelsPageResults = $baseRelsPage.getResults())
+      #if( $baseRelsPageResults )
+       #set( $success = $versionedRelationships.addAll($baseRelsPageResults ))
+      #end 
+      #set( $start = $start + $count)
+    #end
+  #end
+  ##
+  #foreach( $versionedRelationship in $versionedRelationships )
+    #if( $inDownstream ) ## Get Downstream Relationships
+      #set( $upItemId = $versionedRelationship.getFromItem().getValue().get(0) )
+      #set( $upItemVersion = $versionedRelationship.getFromItem().getValue().get(1) )
+      
+      ## Get CountourItem by Id and Version ## 
+      #set( $upDocVersion = $documentSource.getVersionByDocAndVersionNumber($upItemId,$upItemVersion))
+      #set( $upDoc = $upDocVersion.document)
+
+      #if( $inDoc.id == $upDoc.id ) 
+        #set( $dnItemId = $versionedRelationship.getToItem().getValue().get(0) )
+        #set( $dnItemVersion = $versionedRelationship.getToItem().getValue().get(1) )
+    
+        ## Get CountourItem by Id and Version ##  
+        #set( $dnVersion = $documentSource.getVersionByDocAndVersionNumber($dnItemId,$dnItemVersion))
+        #set( $dnDoc = $dnVersion.document ) 
+
+        #if( !$relatedIds.contains($dnDoc.id) )
+          #set( $success = $relatedIds.add($dnDoc.id) )
+          #set( $success = $returnBaselineRels.add( {"fromDocument":$inDoc,"toDocument":$dnDoc} ) )
+        #end
+      #end 
+    #else
+      #set( $dnItemId = $versionedRelationship.getToItem().getValue().get(0) )
+      #set( $dnItemVersion = $versionedRelationship.getToItem().getValue().get(1) )
+      
+      ## Get CountourItem by Id and Version ## 
+      #set( $dnDocVersion = $documentSource.getVersionByDocAndVersionNumber($dnItemId,$dnItemVersion))
+      #set( $dnDoc = $dnDocVersion.document)
+    
+
+      #if( $inDoc.id == $dnDoc.id ) ## Get Upstream Relationships
+        #set( $upItemId = $versionedRelationship.getFromItem().getValue().get(0) )
+        #set( $upItemVersion = $versionedRelationship.getFromItem().getValue().get(1) )
+  
+        ## Get CountourItem by Id and Version ##  
+        #set( $upVersion = $documentSource.getVersionByDocAndVersionNumber($upItemId,$upItemVersion))
+        #set( $upDoc = $upVersion.document )
+ 
+
+        #if( !$relatedIds.contains( $upDoc.id) )
+          #set( $success = $relatedIds.add( $upDoc.id) )
+          #set( $success = $returnBaselineRels.add( {"fromDocument":$upDoc,"toDocument":$inDoc} ) )
+        #end
+      #end
+
+    #end 
+  #end
+#end
+#########################################################################################################################
+##          Macro: getRelationships
+##          Inputs: $baselineMode - GLOBAL, tells the report if the export was from a baseline or not 
+##                  $baselineId - GLOBAL, ID of a baseline       
+##                  $inDoc - current item
+##                  $inDownstream - true provides downstream relationships, false provides upstream relationships
+##          Creates: $returnRels - list of relationships with sub-elements of "fromItem" and "toItem" each of type 
+##                   item
+#########################################################################################################################
+#macro( getRelationships $inDoc $inDownstream )
+  #set( $returnRels = [] )
+
+  #if( $baselineMode && $baselineId )
+      #set( $inDocId = $inDoc.id )
+      #* If the item is active then we have the most recent version of the item. 
+      * The $inDoc.id is equivalent to the $inDoc.currentVersion.originDocument.id. 
+      * Thus we utilize the $inDoc.id as it is the more efficient retrieval of that id. 
+      * This "current version" id will be utilized as the first argument in the method
+      * getRelationships($currentVersionId,$baselineId,$start,$count)) in the #getBaselineRelationships macro. 
+            *
+      * If the item is not active, then we have a prior version of the item or the item has been deleted, 
+      * but we still want it to show up in the baselined trace - we want to show every related 
+      * item that existed when the baseline snapshot was made. In this case, to get the current version id of the 
+      * non-active item we utilize $inDoc.currentVersion.originDocument.id.
+      *#
+      #if( !$inDoc.active )
+        #set( $currentVersion = $inDoc.currentVersion ) 
+        #set( $inDocId = $currentVersion.originDocument.id ) 
+      #end 
+      #getBaselineRelationships( $inDocId, $baselineId, $inDoc, $inDownstream ) ## Creates $returnBaselineRels 
+      #set( $returnRels = $returnBaselineRels )
+  #else
+
+    #set( $rels = [] )
+    #set ( $rels = $documentSource.getRelationshipsForDocument($inDoc.id, $inDownstream) )
+    #foreach( $rel in $rels )
+      #if( $inDownstream )  ## Get Downstream Relationships
+        #if ( $rel.toDocument.active )
+          #set( $success = $returnRels.add( $rel ) )
+        #end
+      #else                 ## Get Upstream Relationships
+        #if ( $rel.fromDocument.active )
+          #set( $success = $returnRels.add( $rel ) )
+        #end
+      #end
+    #end
+  #end
+#end
+##
+
+######################################################################################################################
+######################################################################################################################
+
+#########################################################################################################################
+##
+##  BODY
+##
+#########################################################################################################################
+
+
+------=_NextPart_01D8DFBE.2078AF30
+Content-Location: file:///C:/61233B10/Single_Sheet_Mockup_files/sheet001.htm
+Content-Type: text/html; charset="utf-8"
+
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:x="urn:schemas-microsoft-com:office:excel"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+<meta name=ProgId content=Excel.Sheet>
+<meta name=Generator content="Microsoft Excel 15">
+<link id=Main-File rel=Main-File href="../Single_Sheet_Mockup.htm">
+<link rel=File-List href=filelist.xml>
+<<style>
+<!--table
+  {mso-displayed-decimal-separator:"\.";
+  mso-displayed-thousand-separator:"\,";}
+@page
+  {margin:.75in .7in .75in .7in;
+  mso-header-margin:.3in;
+  mso-footer-margin:.3in;}
+-->
+</style>
+</head>
+
+  
+<body link="#0563C1" vlink="#954F72" class=xl65>
+
+
+#### REPLACE THIS TABLE WITH THE TABLE FROM YOUR MOCKUP from <table.*?>...</table> #### 
+
+    ## Header Row
+        <table border=0 cellpadding=0 cellspacing=0 width=2651 style="border-collapse:
+            collapse;table-layout:fixed;width:1991pt">
+            <col width=178 style="mso-width-source:userset;mso-width-alt:6509;width:134pt">
+            <col width=120 span=2 style="mso-width-source:userset;mso-width-alt:= 4388; width:90pt">
+            <col width=311 style="mso-width-source:userset;mso-width-alt:11373;width:233pt">
+            <col width=126 style="mso-width-source:userset;mso-width-alt:4608;width:95pt">
+            <col width=117 style="mso-width-source:userset;mso-width-alt:4278;width:88pt">
+            <col width=90 style="mso-width-source:userset;mso-width-alt:3291;width:68pt">
+            <col width=293 style="mso-width-source:userset;mso-width-alt:10715;width:220pt">
+            <col width=104 style="mso-width-source:userset;mso-width-alt:3803;width:78pt">
+            <col width=366 style="mso-width-source:userset;mso-width-alt:13385;width:275pt">
+            <col width=121 style="mso-width-source:userset;mso-width-alt:4425;width:91pt">
+            <col width=103 style="mso-width-source:userset;mso-width-alt:3766;width:77pt">
+            <col width=209 style="mso-width-source:userset;mso-width-alt:7643;width:157pt">
+            <col width=201 style="mso-width-source:userset;mso-width-alt:7350;width:151pt">
+            <col width=64 span=3 style="width:48pt">
+            <tr class=xl72 height=31 style="mso-height-source:userset;height:23.45pt">
+            </tr>
+            <td rowspan=3 height=115 width=178 style="height:86.45pt;width:13.4pt" align=left valign=top>
+              <!--[if gte vml 1]>
+                <v:shape style="position:absolute;margin-left:28.5pt;margin-top:12.75pt;width:8=6.25pt;height:62.25pt;z-index:9;visibility:visible">
+                <v:imagedata src= "cid:DFMEATemplateExample_image001.png"/>
+                </v:shape>
+              <![endif]-->
+        </table>
+              </span></td>
+
+    ## Dynamic Content Rows (Exported Items)
+    #*#foreach( $vDoc in $documentList )
+      #if( $foreach.index > 0 || !$baselineMode )
+        #set( $doc = $vDoc.document )
+        #set( $docTypeKey = $doc.documentType.documentTypeKey )
+        <tr>
+          <td class=xl67 style="border-left:none;width:101pt">$doc.documentKey</td>
+          <td class=xl67 style="width:113pt">$doc.name</td>
+        </tr>
+      #end
+    #end*#
+
+  </table>
+
+</body>
+
+
+</html>
+
+
+
+## Leave boundaries and file list as is ## 
+
+------=_NextPart_01D8DFBE.2078AF30
+Content-Id: DFMEATemplateExample_image001.png
+Content-Transfer-Encoding: base64
+Content-Type: png
+
+iVBORw0KGgoAAAANSUhEUgAAAHMAAABTCAYAAACs7zjQAAAAAXNSR0IArs4c6QAAAAlwSFlzAAAO
+xAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUATWljcm9zb2Z0IE9mZmljZX/tNXEAAEiiSURBVHhe
+zb3nl53Xlea3b6iccy7knEiQIEiKQZREST1tc4I/2PPF/5q/eK1Z9rK9PLJnutVSa6QmwQwikEhE
+LqACqlA5161b5ee393uqLtAgJao5s3zBy6q69w3n7PjscM5b3NbL/iu/trbSLbYtl8sZt+Sdy/Fz
+y/L5vH7G5/l8QaPJ+Yh0qL84f3VlzTa3tmxlZVWfb9na2oY9ePDQ7t+/b4uLi35d3umVft/SOfxe
+X19vvb29tm/ffmtra7bV1XVbX1/3w6FAdXWV1dbWWqFQsHJ509+Mi3Orq6utpqbWqqqqfMx+gl6M
+NZfLW7HIccxFY96K4XPEtj7TqHbGxBx3X8yfOcZnQY/K7384U4o//JQffgaDhCH5fGIShE80gYm5
+jIlx7c3NLR1ftomJJ/Z49LEtLCzY/NyCbZTKNj8/Z6VSyQnNC+LzDqYFUSqJk+65srJsd+7c9nc6
+hms0NNSLSdW6RtGampqcqe3t7dbS0uxM5L2xseFv7hH3yVt1VZAur5vmdf9iIS9hqBHTa1wK/V8m
+uOkcuM3oGBPDrNSjfykjGct/E2aGnFbIZKaZTCqfr/IvSmLU6uqKa9vo6Kg0cMXmZudsdm7WiVOA
+eSIiYg+jk8YlLQ/ChLZD7GcZGn+HUKE66feyC0oi7sTEqBO5oaHBGhubXBP5fWCgX8xtdaGB8Qjm
++kYpdE732yqHhamuLkpLiy5oVRKK+rp6HzfMDsbKypS3GGVmdcIapfE8Q6S/4o//JsxkIvAixh3E
+zhTLlpZg4H2bnp6xBw8fusksbW5aSZrgxJNmcH55s+wEQ/L7+gatToRaW1tzwlZqI3coSEv4rFzm
+nG1p87wEZdWFIo0h0SqZUrS6UKh2YVlfL0mYpnZM98jII9fazs5Oa25utq6uLmcyr63tsuVNDJJ1
+2RRTN8sbLru59TVbXl728ReL0nC90dyCTLJrpetumNYfQysZy391Zu6akjCxyezNzMzZ48ejdvfO
+HXv4cMR1d1PEh6hMGh/X1trqREPK29vbfPpoRm9vj5tFGISWVvpYBADtKBQLmW82177FxXmTLPhn
+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
+at/36f8Ht3AFgKSCMzsAAAAASUVORK5CYIJ=
+
+------=_NextPart_01D8DFBE.2078AF30
+Content-Location: file:///C:/61233B10/Single_Sheet_Mockup_files/filelist.xml
+Content-Type: text/xml; charset="utf-8"
+
+<xml xmlns:o="urn:schemas-microsoft-com:office:office">
+ <o:MainFile HRef="../Single_Sheet_Mockup.htm"/>
+ <o:File HRef="stylesheet.css"/>
+ <o:File HRef="sheet001.htm"/>
+ <o:File HRef="filelist.xml"/>
+ <o:File HRef="filelist.xml"/>
+ <o:File HRef="DFMEATemplateExample_image001.png"/>
+</xml>
+------=_NextPart_01D8DFBE.2078AF30--
